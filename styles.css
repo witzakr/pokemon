@@ -1,0 +1,27 @@
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 300px;
+    text-transform: capitalize;
+}
+
+
+img {
+    height: 100px;
+}
+
+
+.pokemon {
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.stats {
+    margin-top: 5px;
+}
+
+.stats p {
+    margin: 0;
+}
