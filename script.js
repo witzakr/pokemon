@@ -29,37 +29,42 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.log('Error fetching Pokemon:', error));
 });
 
-// Function to extract Pokemon ID from URL
-function getPokemonId(url) {
-    const parts = url.split('/');
-    return parts[parts.length - 2];
-}
+    // Function to extract Pokemon ID from URL
+    function getPokemonId(url) {
+        const parts = url.split('/');
+        return parts[parts.length - 2];
+    }
 
-// Function to toggle stats
-function toggleStats(pokemonElement, url) {
-    const statsElement = pokemonElement.querySelector('.stats');
+    // Function to toggle stats
+    function toggleStats(pokemonElement, url) {
+        const imageElement = pokemonElement.querySelector('img');
+        const statsElement = pokemonElement.querySelector('.stats');
 
-    // If stats already exist, remove them
-    if (statsElement) {
-        pokemonElement.removeChild(statsElement);
-    } else {
-        // Fetch stats from PokeAPI and display
-        fetch(url)
+        // If stats already exist, remove them and show image
+        if (statsElement) {
+            pokemonElement.removeChild(statsElement);
+            imageElement.style.display = 'block'; // Show image
+        } else {
+            // Fetch stats from PokeAPI and display
+            fetch(url)
             .then(response => response.json())
             .then(data => {
                 const statsContainer = document.createElement('div');
                 statsContainer.classList.add('stats');
-
-                // Extract stats and add to container
-                for (const stat of data.stats) {
+        
+                // Iterate over each stat and create elements
+                data.stats.forEach(stat => {
                     const statElement = document.createElement('p');
                     statElement.textContent = `${stat.stat.name}: ${stat.base_stat}`;
                     statsContainer.appendChild(statElement);
-                }
-
-                // Append stats to Pokemon element
+                });
+        
+                // Hide image and append stats to Pokemon element
+                imageElement.style.display = 'none'; // Hide image
                 pokemonElement.appendChild(statsContainer);
             })
             .catch(error => console.log('Error fetching Pokemon stats:', error));
+        
+        }
     }
-}
+
