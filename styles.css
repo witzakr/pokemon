@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: 'Pokemon Solid', sans-serif;
     background: #3c5aa6;
+    letter-spacing: 5px;
 }
 
 .dashboard {
